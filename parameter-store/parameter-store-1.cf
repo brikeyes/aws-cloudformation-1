@@ -1,0 +1,59 @@
+{
+    "Description": "Create SSM Parameter",
+        "Parameters": {
+            "name": {
+                "Type": "String"
+            },
+            "value": {
+                "Type": "String"
+            }
+        },
+    "Resources": {
+        "BasicParameter": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+                "Name": {
+                    "Ref": "name"
+                },
+                "Type": "String",
+                "Value": {
+                    "Ref": "value"
+                },
+                "Description": "parameter store entry"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "10765060-f65c-42ca-916d-42f25f93b1f8"
+                }
+            }
+        }
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "10765060-f65c-42ca-916d-42f25f93b1f8": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 60,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "1493d0ec-aaad-45b3-a109-cf9a83a5328a": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 150,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            }
+        }
+    }
+}
