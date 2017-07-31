@@ -89,3 +89,13 @@ Now delete the stack and instance when you are finished.
 
     $ aws cloudformation delete-stack --stack-name ec2-docker
 
+While you are developing and testing the stack via the aws cli it can be helpful to
+confirm as much as possible before attemping a stack creation.
+The aws cloudformation cli validate-template command can do some of that.
+
+An example of using that follows
+
+    aws cloudformation validate-template --template-body file://stack.yml
+
+While it does not catch every issue it will check the syntax to some degree and likely
+save you some time.

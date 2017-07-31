@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
+Description: Launch ec2 instance and install docker
 Parameters:
   mykeyname:
     Type: String
