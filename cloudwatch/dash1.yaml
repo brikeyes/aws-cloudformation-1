@@ -1,0 +1,39 @@
+Description: >
+  This template creates a CloudWatch metrics filter which looks for exceptions in a log group.
+  It then creates a dashboard which includes that widget. Note that the metric is uniquely named
+  by prefixing the name with the stackname. This is so that the same template could be
+  used in multiple stacks without name conflicts in the filter metric.
+
+  Note that using this template might incur a cost with the metric and dashboard.
+
+
+Resources:
+
+  CloudWatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref AWS::StackName
+      RetentionInDays: 7
+
+  CWMetricFilterErrors:
+    Type: "AWS::Logs::MetricFilter"
+    DependsOn: CloudWatchLogsGroup
+    Properties:
+      FilterPattern: "[exception]"
+      LogGroupName: !Ref AWS::StackName
+      MetricTransformations:
+      - MetricValue: '1'
+        MetricNamespace: LogMetrics
+        MetricName: !Sub ${AWS::StackName}-exceptionCount
+
+
+  CWDashboard:
+    Type: AWS::CloudWatch::Dashboard
+    Properties:
+      DashboardName: !Ref AWS::StackName
+      DashboardBody: !Sub '{
+        "widgets": [{"type": "metric",
+        "properties": {"metrics": [[ "LogMetrics", "${AWS::StackName}-exceptionCount" ]],
+        "title": "${AWS::StackName}-exceptionCount",
+        "period": 60,"region": "${AWS::Region}"}}]
+        }'
