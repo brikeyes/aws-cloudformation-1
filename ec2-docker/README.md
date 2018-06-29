@@ -1,5 +1,11 @@
 ## Description
 
+before you start :
+
+you will need to create a PEM key and have it available for use before running the script you can do this from the AWS EC2 console , copy the PEM key you create to the same folder you are running the script from
+you will also need to configure and install AWS CLI and create and connect to AWS with access and secret access key
+you will also need to find out what your public IP is 
+
 This is an example of using CF to launch an EC-2 instance and then install
 docker.
 It also demonstrates how to pass multiple parameters to the CF stack using a json formatted
